@@ -8,5 +8,5 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     // Inserindo o Professor na query para impedir que um professor possa acessar dados de outros professores
     @Query("select c from Course c where c.id = ?1 and c.professor = ?#{principal.professor}")
-    Course findByIdAndProfessor(Long id);
+    Course findCourseById(Long id);
 }
