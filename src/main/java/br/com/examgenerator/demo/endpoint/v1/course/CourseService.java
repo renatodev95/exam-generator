@@ -21,4 +21,10 @@ public class CourseService implements Serializable {
             throw new ResourceNotFoundException("Course not found");
         }
     }
+
+    public void throwResourceNotFoundIfCourseDoesNotExist(Long courseId) {
+        if (courseId == 0 || courseRepository.findCourseById(courseId) == null) {
+            throw new ResourceNotFoundException("Course not found");
+        }
+    }
 }

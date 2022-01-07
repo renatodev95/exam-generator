@@ -6,13 +6,13 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Objects;
 
-import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @MappedSuperclass
 public class AbstractEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     protected Long id;
 
     public Long getId() {
