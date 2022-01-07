@@ -1,16 +1,15 @@
 package br.com.examgenerator.demo.endpoint.v1.course;
 
-import br.com.examgenerator.demo.persistence.model.ApplicationUser;
 import br.com.examgenerator.demo.persistence.model.Course;
 import br.com.examgenerator.demo.persistence.repository.CourseRepository;
 import br.com.examgenerator.demo.util.EndpointUtil;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("v1/professor/course")
@@ -42,7 +41,7 @@ public class CourseEndpoint {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         courseService.throwResourceNotFoundIfCourseDoesNotExist(id);
         courseRepository.deleteById(id);
-        return new ResponseEntity<>(NO_CONTENT);
+        return new ResponseEntity<>(OK);
     }
 
     @PutMapping
@@ -55,6 +54,6 @@ public class CourseEndpoint {
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Course course) {
         course.setProfessor(endpointUtil.extractProfessorFromToken());
-        return new ResponseEntity<>(courseRepository.save(course), NO_CONTENT);
+        return new ResponseEntity<>(courseRepository.save(course), OK);
     }
 }
